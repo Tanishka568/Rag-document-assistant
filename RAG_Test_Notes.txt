@@ -1,0 +1,52 @@
+RETRIEVAL-AUGMENTED GENERATION (RAG) — TEST NOTES
+
+1. What is RAG?
+Retrieval-Augmented Generation (RAG) is a technique that combines information retrieval with text generation. It searches a collection of documents and provides relevant passages to a language model before the model generates an answer. RAG helps answers use information from a supplied knowledge base.
+
+2. Main Components of a RAG System
+A RAG system has two main components:
+- Retriever: Finds document passages that are relevant to the user's question.
+- Generator: Uses the question and retrieved passages to produce an answer.
+
+3. RAG Workflow
+The typical RAG workflow includes:
+1. Collect documents.
+2. Split long documents into smaller chunks.
+3. Convert chunks into numerical embeddings.
+4. Store embeddings and text in a vector database.
+5. Convert the user's question into an embedding.
+6. Retrieve the most relevant chunks.
+7. Provide the retrieved context to a language model.
+8. Generate an answer grounded in the context.
+
+4. Document Chunking
+Chunking means dividing a long document into smaller text sections. Chunk size affects retrieval quality. A small overlap between adjacent chunks can preserve context when a sentence or topic crosses a chunk boundary.
+
+5. Embeddings and Semantic Search
+Text embeddings are numerical vectors that represent the meaning of text. Semantic search compares the meaning of a question with the meanings of stored text chunks. Similarity measures such as cosine similarity can rank relevant passages.
+
+6. Vector Database
+A vector database stores document chunks, their embeddings, and metadata. ChromaDB is one example. When a question is asked, the database searches for similar vectors and returns the corresponding passages.
+
+7. Large Language Model (LLM)
+A large language model generates natural-language responses. In a RAG system, the model receives both the question and retrieved context. FLAN-T5 is an example of a pre-trained text-to-text model that can be used for answer generation.
+
+8. RAG vs. LLM Without Retrieval
+An LLM without retrieval answers using its general learned knowledge and the prompt. A RAG system can use a supplied document collection as additional context. This can make answers more relevant to private or newly provided documents, provided that retrieval returns useful passages.
+
+9. Limitations of RAG
+RAG does not guarantee that every answer is correct. If the retriever selects unrelated, incomplete, or outdated passages, the generated answer may be weak or incorrect. The language model may also misunderstand the retrieved context.
+
+10. Evaluating RAG Answers
+Answers can be evaluated based on:
+- Relevance to the question
+- Factual support from retrieved passages
+- Completeness
+- Missing important facts
+- Unsupported claims
+
+The same questions should be used when comparing a RAG system with an LLM-only baseline.
+
+11. Example Question
+Question: What are the two main parts of a RAG system?
+Answer: The two main parts are the retriever and the generator. The retriever finds relevant passages, and the generator uses those passages with the question to prepare an answer.
